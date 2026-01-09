@@ -1,0 +1,5 @@
+{
+  "name": " PredictaFlow2",
+  "description": "An AI-powered smart water management and forecasting system integrating IoT data, Digital Twins, and climate analytics to optimize water usage and prevent shortages.",
+  "requestFramePermissions": []
+}
