@@ -1,29 +1,38 @@
-import React from 'react';
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Dashboard from './components/Dashboard';
-import Forecasting from './components/Forecasting';
-import DigitalTwin from './components/DigitalTwin';
-import WeatherForecast from './components/WeatherForecast';
-import LongTermPrediction from './components/LongTermPrediction';
-import AIAssistant from './components/AIAssistant';
-import { ThemeProvider } from './contexts/ThemeContext';
 
 const AppContent: React.FC = () => {
+  const location = useLocation();
+
   return (
-    <div className="min-h-screen bg-[#f0f4f8] dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
+    <div className="min-h-screen overflow-x-hidden bg-[#f0f4f8] font-sans text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
+      <a
+        href="#main-content"
+        className="sr-only z-50 rounded-lg bg-blue-600 px-4 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+      >
+        Skip to main content
+      </a>
+
       <Sidebar />
-      
-      <main className="md:ml-64 p-4 md:p-8 min-h-screen transition-all">
-        <div className="max-w-7xl mx-auto">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/digital-twin" element={<DigitalTwin />} />
-            <Route path="/forecasting" element={<Forecasting />} />
-            <Route path="/long-term" element={<LongTermPrediction />} />
-            <Route path="/weather" element={<WeatherForecast />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+
+      <main
+        id="main-content"
+        tabIndex={-1}
+        aria-label="Main content"
+        className="min-h-screen w-full p-4 transition-[margin,padding] duration-300 sm:p-6 md:ml-64 md:w-[calc(100%-16rem)] md:p-8"
+      >
+        <div className="mx-auto w-full max-w-7xl">
+          <div
+            key={location.pathname}
+            className="motion-safe:animate-[fadeIn_250ms_ease-out]"
+          >
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/digital-twin" element={<DigitalTwin />} />
+              <Route path="/forecasting" element={<Forecasting />} />
+              <Route path="/long-term" element={<LongTermPrediction />} />
+              <Route path="/weather" element={<WeatherForecast />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
         </div>
       </main>
 
@@ -32,15 +41,3 @@ const AppContent: React.FC = () => {
     </div>
   );
 };
-
-const App: React.FC = () => {
-  return (
-    <HashRouter>
-      <ThemeProvider>
-        <AppContent />
-      </ThemeProvider>
-    </HashRouter>
-  );
-};
-
-export default App;
