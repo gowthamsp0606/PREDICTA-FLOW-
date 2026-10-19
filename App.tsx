@@ -14,7 +14,7 @@ const AppContent: React.FC = () => {
     <div className="min-h-screen bg-[#f0f4f8] dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
       <Sidebar />
       
-      <main className="md:ml-64 p-4 md:p-8 min-h-screen transition-all">
+      <main className="w-full md:ml-64 md:w-[calc(100%-16rem)] p-4 sm:p-6 md:p-8 min-h-screen transition-all duration-300">
         <div className="max-w-7xl mx-auto">
           <Routes>
             <Route path="/" element={<Dashboard />} />
